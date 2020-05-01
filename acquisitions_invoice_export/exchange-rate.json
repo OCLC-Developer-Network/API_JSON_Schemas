@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "exchange-rate.json",
+    "title": "ExchangeRate",
+    "description": "Number (up to six decimal places) used to calculate the value of one currency for the purpose of conversion to another when the invoice currency differs from the currency of the institution. ",
+    "type": "object",
+    "properties": {
+        "foreignCurrency": {
+            "description": "Currency of the invoice.  May be different from currency of the institution.",
+            "type": "string",
+            "readOnly": true
+        },
+        "homeCurrency": {
+            "description": "Currency used by the institution for its budget.",
+            "type": "string",
+            "readOnly": true
+        },
+        "rate": {
+            "description": "A number (up to six decimal places) that you multiply by the foreign currency (if one exists) to determine the cost of the invoice in the home currency.",
+            "type": "number",
+            "minimum": 0.0000000001,
+            "maximum": 999999.9999999999
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "foreignCurrency",
+        "homeCurrency",
+        "rate"
+    ]
+}

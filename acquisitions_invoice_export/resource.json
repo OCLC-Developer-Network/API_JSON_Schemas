@@ -1,0 +1,120 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "resource.json",
+    "title": "Resource",
+    "description": "a resource",
+    "type": "object",
+    "definitions": {
+        "worldCatResource": {
+            "description": "A resource for an item taken from WorldCat.",
+            "type": "object",
+            "properties": {
+                "oclcNumber": {
+                    "description": "The OCLC Control Number is a unique, sequentially assigned number associated with a record in WorldCat. The number is included in a WorldCat record when the record is created. The OCLC Control Number enables successful implementation and use of many OCLC products and services, including WorldCat Local and WorldCat Navigator.
+OCLC encourages the use of the OCLC Control Number in any appropriate library application, where it can be treated as if it is in the public domain.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "resourceType": {
+                    "description": "The type or source of the resource metadata, including WorldCat, the WorldCat knowledgebase (for eProducts), or Local Resources (entered by the user).",
+                    "type": "string",
+                    "const": "WORLDCAT",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseResource"
+                }
+            ],
+            "required": []
+        },
+        "kbwcEntryResource": {
+            "description": "A specific title in the Worldcat knowledge base.",
+            "type": "object",
+            "properties": {
+                "kbTitleID": {
+                    "description": "A specific value used to identify an e-resource title from the Knowledge Base.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "resourceType": {
+                    "description": "The type or source of the resource metadata, including WorldCat, the WorldCat knowledgebase (for eProducts), or Local Resources (entered by the user).",
+                    "type": "string",
+                    "const": "KBWC_ENTRY",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseResource"
+                }
+            ],
+            "required": []
+        },
+        "kbwcCollectionResource": {
+            "description": "A specific collection in the Worldcat knowledge base.",
+            "type": "object",
+            "properties": {
+                "kbCollectionID": {
+                    "description": "A specific value used to identify an e-resource collection from the Knowledge Base.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "resourceType": {
+                    "description": "The type or source of the resource metadata, including WorldCat, the WorldCat knowledgebase (for eProducts), or Local Resources (entered by the user).",
+                    "type": "string",
+                    "const": "KBWC_COLLECTION",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseResource"
+                }
+            ],
+            "required": []
+        },
+        "localResource": {
+            "description": "A specific resource created by the user because it was not in WorldCat or the WorldCat knowledge base.",
+            "type": "object",
+            "properties": {
+                "localResourceID": {
+                    "description": "A specific value used to identify an local resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "resourceType": {
+                    "description": "The type or source of the resource metadata, including WorldCat, the WorldCat knowledgebase (for eProducts), or Local Resources (entered by the user).",
+                    "type": "string",
+                    "const": "LOCAL",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseResource"
+                }
+            ],
+            "required": []
+        },
+        "baseResource": {
+            "$id": "baseResource",
+            "description": "A base resource containing fields common to all resource types.",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "The descriptive name used to identify an intellectual work such as a book, film or other composition.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "materialTypeCode": {
+                    "description": "A category of an item that defines the physical or digital nature of the item (e.g., book, CD, eBook, etc.).",
+                    "type": "string",
+                    "maxLength": 30,
+                    "readOnly": true
+                }
+            }
+        }
+    }
+}

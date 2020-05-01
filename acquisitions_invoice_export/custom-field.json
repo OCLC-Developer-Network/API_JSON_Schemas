@@ -1,0 +1,177 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "custom-field.json",
+    "title": "CustomField",
+    "description": "a custom field",
+    "type": "object",
+    "definitions": {
+        "dateField": {
+            "description": "A custom field storing a single date.",
+            "type": "object",
+            "properties": {
+                "@type": {
+                    "type": "string",
+                    "const": "DateField",
+                    "readOnly": true
+                },
+                "value": {
+                    "description": "The value of a custom date field.",
+                    "type": "string",
+                    "format": "date",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseCustomField"
+                }
+            ],
+            "required": []
+        },
+        "textField": {
+            "description": "A custom field storing a single text string.",
+            "type": "object",
+            "properties": {
+                "@type": {
+                    "type": "string",
+                    "const": "TextField",
+                    "readOnly": true
+                },
+                "value": {
+                    "description": "The value of a custom text field.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseCustomField"
+                }
+            ],
+            "required": []
+        },
+        "numberField": {
+            "description": "A custom field storing a single number.  The number can have up to 4 decimal places.",
+            "type": "object",
+            "properties": {
+                "@type": {
+                    "type": "string",
+                    "const": "NumberField",
+                    "readOnly": true
+                },
+                "value": {
+                    "description": "The value of a custom number field.",
+                    "type": "number",
+                    "readOnly": true
+                },
+                "decimalPlaces": {
+                    "description": "The number of decimal places used for a custom number field.",
+                    "type": "integer",
+                    "readOnly": true
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseCustomField"
+                }
+            ],
+            "required": []
+        },
+        "selectField": {
+            "description": "A custom field storing one option from a list of options.",
+            "type": "object",
+            "properties": {
+                "@type": {
+                    "type": "string",
+                    "const": "SelectField",
+                    "readOnly": true
+                },
+                "value": {
+                    "description": "The selected option for a custom select field.",
+                    "$ref": "selectableOption"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseCustomField"
+                }
+            ],
+            "required": []
+        },
+        "mutiSelectField": {
+            "description": "A custom field storing more than one option from a list of options.",
+            "type": "object",
+            "properties": {
+                "@type": {
+                    "type": "string",
+                    "const": "MultiSelectField",
+                    "readOnly": true
+                },
+                "value": {
+                    "description": "The selected option or options from a custom multi-select field.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "selectableOption"
+                    },
+                    "uniqueItems": true,
+                    "additionalItems": false
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "baseCustomField"
+                }
+            ],
+            "required": []
+        },
+        "baseCustomField": {
+            "$id": "baseCustomField",
+            "description": "A base custom field containing fields common to all custom field types.",
+            "type": "object",
+            "properties": {
+                "label": {
+                    "description": "The label used for the custom field.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "description": {
+                    "description": "A description of the custom field.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "fieldDefinitionNumber": {
+                    "description": "The number of the custom field (1-20).  Used by Analytics to determine how it is listed in the Analytics Universe.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "locale": {
+                    "description": "The locale of a custom field.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "selectableOption": {
+            "$id": "selectableOption",
+            "description": "One of the selectable options for a custom select or multi-select field.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The identifier used for a selectable option for a custom select or multi-select field.",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "label": {
+                    "description": "The label used for a selectable option for a custom select or multi-select field.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "active": {
+                    "description": "A flag that determines whether the selectable option is enabled for use or not.",
+                    "type": "boolean",
+                    "readOnly": true
+                }
+            }
+        }
+    }
+}

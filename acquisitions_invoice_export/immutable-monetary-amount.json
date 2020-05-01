@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "immutable-monetary-amount.json",
+    "title": "ImmutableMonetaryAmount",
+    "description": "Represents an amount in a specific currency that cannot be updated.",
+    "type": "object",
+    "properties": {
+        "amount": {
+            "description": "Monetary amount.",
+            "type": "number",
+            "readOnly": true
+        },
+        "currency": {
+            "description": "ISO currency code.",
+            "type": "string",
+            "readOnly": true
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "amount",
+        "currency"
+    ]
+}
